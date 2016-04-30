@@ -1,5 +1,5 @@
 # Set the base image to Ubuntu
-FROM node:argon
+FROM node:slim
 
 # File Author / Maintainer
 MAINTAINER alleles
@@ -15,6 +15,5 @@ RUN npm install
 # Bundle app source
 COPY . /usr/src/app
 
-EXPOSE 8080
 CMD [ "npm", "start" ]
 
