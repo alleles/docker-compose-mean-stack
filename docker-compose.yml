@@ -8,16 +8,6 @@ nginx:
         - node3:node3
     ports:
         - "80:80"
-consul:
-  image: progrium/consul
-  restart: always
-  hostname: consul
-  ports:
-    - "8300:8300"
-    - "8400:8400"
-    - "8500:8500"
-    - "8600:53/udp"
-  command: "-server -bootstrap"
 node1:
     build: ./node
     mem_limit: 256m
@@ -25,7 +15,6 @@ node1:
     links:
         - redis
         - mongo
-        - consul
     ports:
         - "8080"
     environment:
@@ -37,7 +26,6 @@ node2:
     links:
         - redis
         - mongo
-        - consul
     ports:
         - "8080"
     environment:
@@ -49,7 +37,6 @@ node3:
     links:
         - redis
         - mongo
-        - consul
     ports:
         - "8080"
     environment:

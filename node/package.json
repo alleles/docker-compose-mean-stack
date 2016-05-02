@@ -8,8 +8,8 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "consul": "^0.25.0",
     "express": "^4.13.3",
+    "mongoose": "^4.4.14",
     "redis": "^2.5.3"
   }
 }
