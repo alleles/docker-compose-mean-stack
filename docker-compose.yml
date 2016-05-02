@@ -1,3 +1,18 @@
+consul:
+    command: -server -bootstrap -advertise 10.0.2.15
+    image: progrium/consul:latest
+    ports:
+        - "8300:8300"
+        - "8400:8400"
+        - "8500:8500"
+        - "8600:53/udp"
+registrator:
+    command: -ip=10.0.2.15 consul://consul:8500
+    image: gliderlabs/registrator:latest
+    links:
+        - consul
+    volumes:
+        - "/var/run/docker.sock:/tmp/docker.sock"
 nginx:
     build: ./nginx
     mem_limit: 256m
@@ -9,7 +24,7 @@ nginx:
     ports:
         - "80:80"
 node1:
-    build: ./node
+    image: alleles/node
     mem_limit: 256m
     cpu_shares: 512
     links:
@@ -20,7 +35,7 @@ node1:
     environment:
         - PORT=8080
 node2:
-    build: ./node
+    image: alleles/node
     mem_limit: 256m
     cpu_shares: 512
     links:
@@ -31,7 +46,7 @@ node2:
     environment:
         - PORT=8080
 node3:
-    build: ./node
+    image: alleles/node
     mem_limit: 256m
     cpu_shares: 512
     links:
